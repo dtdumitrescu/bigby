@@ -245,6 +245,9 @@ class BgbResult {
  */
 class BgbUtils {
 
+  private static $from_cc_func = null;
+  private static $to_cc_func = null;
+
   public static function multipleIsSet($array, $keys) {
     if(!$array || !is_array($array)) {
       return false;
@@ -300,16 +303,20 @@ class BgbUtils {
 
   public static function from_camel_case($str) {
     $str[0] = strtolower($str[0]);
-    $func = create_function('$c', 'return "_" . strtolower($c[1]);');
-    return preg_replace_callback('/([A-Z])/', $func, $str);
+    if(!self::$from_cc_func) {
+      self::$from_cc_func = create_function('$c', 'return "_" . strtolower($c[1]);');
+    }
+    return preg_replace_callback('/([A-Z])/', self::$from_cc_func, $str);
   }
  
   public static function to_camel_case($str, $capitalise_first_char=false) {
     if($capitalise_first_char) {
       $str[0] = strtoupper($str[0]);
     }
-    $func = create_function('$c', 'return strtoupper($c[1]);');
-    return preg_replace_callback('/_([a-z])/', $func, $str);
+    if(!self::$to_cc_func) {
+      self::$to_cc_func = create_function('$c', 'return strtoupper($c[1]);');  
+    }
+    return preg_replace_callback('/_([a-z])/', self::$to_cc_func, $str);
   }
 
   public static function getStacktrace(Exception $e) {
