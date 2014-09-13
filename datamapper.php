@@ -271,6 +271,8 @@ abstract class BgbMapper {
       } else {
         $q->where($where);
       }
+    } elseif($where) {
+      $q->where($where);
     } else {
       $q->multiWhere(array());
     }
