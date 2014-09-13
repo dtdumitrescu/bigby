@@ -514,10 +514,13 @@ abstract class BgbMapper {
     }
     $ids = array();
     foreach($models as $model) {
-      $ids[] = $this->getId($model);
+      $id = $model->getValue($id_field);
+      if(!in_array($id, $ids)) {
+        $ids[] = $id;
+      }
     }
     return $ids;
-  }  
+  }
 
 }
 
