@@ -163,6 +163,18 @@ class BgbEchoLog extends BgbLog {
 
 
 /**
+ *  BgbLog: This log completely suppresses logging.
+ *
+ *  @author Dani Dumitrescu <dtdumitrescu@gmail.com>
+ *
+ */
+class BgbNullLog extends BgbLog {
+  protected function doLog($msg) {
+  }  
+}
+
+
+/**
  *  BgbFileLog: Basic file logging class. Requires 'logfile' in configuration.
  *
  *  @author Dani Dumitrescu <dtdumitrescu@gmail.com>
