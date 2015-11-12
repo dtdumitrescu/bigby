@@ -136,7 +136,8 @@ class Bgb extends BgbConfigurable {
   }
 
   public function loadFile($path) {
-    if(in_array($path, Bgb::$loaded_files)) {
+    $clean_saved_path = str_replace('\\', '/', $path);
+    if(in_array($clean_saved_path, Bgb::$loaded_files)) {
       return;
     }
     if(is_dir($path)) {
@@ -152,7 +153,7 @@ class Bgb extends BgbConfigurable {
       $this->throwLoggedException("Bgb.loadFile : File at [ $path ] does not exist.");
     }
     require($path);
-    Bgb::$loaded_files[] = $path;
+    Bgb::$loaded_files[] = $clean_saved_path;
   }   
 
   public function __get($name) {
