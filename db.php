@@ -91,6 +91,9 @@ class BgbMySqlDB extends BgbDB {
       $dsn = 'mysql:host=' . $this->config['hostname'] . ';dbname=' . $this->config['database'];
       $this->dbh = new PDO($dsn, $this->config['username'], $this->config['password']);
       $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      if(isset($this->config['utf8_names']) && $this->config['utf8_names'] === true) {
+        $this->createQuery()->raw('SET NAMES utf8');
+      }
     } catch(PDOException $e) {
       Bgb::throwLoggedException('BgbMySqlDB.connect : ' . $e->getMessage());
     }
