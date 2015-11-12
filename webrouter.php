@@ -62,7 +62,7 @@ class BgbWebRouter extends BgbRouter {
     $uri = $this->getRequestURI();
     $action = $this->findAction($uri);
     if(!$action) {
-      $this->sendErrorAndDie(404, sprintf('The requested URL %s was not found on this server.', $uri));
+      $this->sendErrorAndDie(404, 'The requested URL was not found on this server.');
     }
     $this->callAction($action);
   }
