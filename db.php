@@ -48,6 +48,8 @@ abstract class BgbDB extends BgbConfigurable {
     parent::__construct($config);
   }
 
+  abstract public function getDatabaseHandle();
+
   abstract public function createQuery();
 
   public function create_placeholders($number_of_placeholders) {
@@ -69,6 +71,10 @@ class BgbMySqlDB extends BgbDB {
   function __construct($config) {
     parent::__construct($config);
   }
+
+  public function getDatabaseHandle() {
+    return $this->dbh;
+  }  
 
   public function createQuery() {
     $this->connect();
