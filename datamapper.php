@@ -422,7 +422,7 @@ abstract class BgbMapper {
     return $this->query_cache[$name];
   }
 
-  protected function loadRelations($models, $filter=null, $get_belongs_to=true) {
+  public function loadRelations($models, $filter=null, $get_belongs_to=true) {
     $models = BgbUtils::makeArray($models);
     if(count($models) === 0) {
       return;
