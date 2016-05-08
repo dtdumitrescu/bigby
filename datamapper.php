@@ -556,7 +556,8 @@ abstract class BgbModel {
   public function getMapper() {
     $mapper_name = $this->getMapperName();
     $mapper_parts = preg_split('/\./', $mapper_name);
-    $datamapper = Bgb::$app->$mapper_parts[0];
+    $mapper_name = $mapper_parts[0];
+    $datamapper = Bgb::$app->$mapper_name;
     return $datamapper->getMapper($mapper_parts[1]);
   }
 
